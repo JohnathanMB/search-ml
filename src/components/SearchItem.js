@@ -1,8 +1,9 @@
 import React from 'react';
+import '../stylesheets/SearchItem.css'
 
 export default function SearchItem({id, title, price, thumbnail}){
     return (
-        <div class="item">
+        <div class="card card-4">
             <p>{id}</p>
             <p>{title}</p>
             <p>{price}</p>
