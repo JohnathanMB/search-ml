@@ -1,8 +1,10 @@
-FROM node:8
+FROM node:8-alpine
 
 ADD yarn.lock /yarn.lock
 ADD package.json /package.json
 
+# Add bash
+RUN apk add --no-cache bash
 ENV NODE_PATH=/node_modules
 ENV PATH=$PATH:/node_modules/.bin
 RUN yarn
