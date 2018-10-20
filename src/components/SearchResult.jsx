@@ -29,7 +29,7 @@ export default class SearchResult extends Component {
         let items = data.results.map(it => {
           return (
             <SearchItem
-              id="el id"
+              id={it.id}
               title={it.title}
               price={it.price}
               thumbnail={it.thumbnail}
