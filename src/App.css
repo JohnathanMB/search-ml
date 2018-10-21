@@ -5,27 +5,31 @@
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
-  fill: #2D3277
+  fill: #2d3277;
 }
 
 .App-header {
-  background-color: #FFE600;
+  background-color: #ffe600;
   height: 150px;
   padding: 20px;
-  color: #2D3277;
+  color: #2d3277;
 }
 
 .App-title {
   font-size: 1.5em;
-  font-family: 'mercadoReact';
+  font-family: "mercadoReact";
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @font-face {
-  font-family: 'mercadoReact';
+  font-family: "mercadoReact";
   src: url("fonts/mlreact.ttf");
 }
