@@ -17,7 +17,7 @@ export default class SearchResult extends Component {
 
   handleClick(itemID) {
     this.setState({ selectedItem: itemID });
-    alert("{itemID}");
+    alert(itemID);
   }
 
   handleChange(event) {
@@ -36,16 +36,11 @@ export default class SearchResult extends Component {
       .then(data => {
         let items = data.results.map(({ id, title, price, thumbnail } = it) => {
           return (
-            <li key={id}>
-              <SearchItem
-                title={title}
-                price={price}
-                thumbnail={thumbnail}
-                onClick={this.handleClick}
-              />
+            <li key={id} onClick={() => this.handleClick(id)}>
+              <SearchItem title={title} price={price} thumbnail={thumbnail} />
             </li>
           );
-        });
+        }, this);
         this.setState({ products: items });
         console.log("state", this.state.products);
       });
