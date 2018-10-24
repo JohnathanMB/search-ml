@@ -15,14 +15,14 @@ export default class SearchResult extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleClick(itemID) {
+  handleClick = itemID => {
     this.setState({ selectedItem: itemID });
     alert(itemID);
-  }
+  };
 
-  handleChange(event) {
+  handleChange = event => {
     this.setState({ search: event.target.value });
-  }
+  };
 
   handleSubmit = keywords => event => {
     fetch(
@@ -57,7 +57,10 @@ export default class SearchResult extends Component {
           />
           <input type="submit" value="Buscar !" />
         </form>
-        <ul>{this.state.products}</ul>
+        <div className="float quarter card card-4">Categories</div>
+        <div className="float three-quarter">
+          <ul>{this.state.products}</ul>
+        </div>
       </React.Fragment>
     );
   }

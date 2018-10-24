@@ -1,5 +1,6 @@
 import React from "react";
 import "../stylesheets/SearchItem.css";
+import "../stylesheets/card.css";
 
 export default function SearchItem({ title, price, thumbnail }) {
   return (
