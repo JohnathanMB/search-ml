@@ -24,9 +24,7 @@ export default class SearchResult extends Component {
     this.setState({ search: event.target.value });
   }
 
-  handleSubmit(event) {
-    var keywords = this.state.search;
-    // alert('Ha buscado el siguiente producto: ' + keywords)
+  handleSubmit = keywords => event => {
     fetch(
       `https://api.mercadolibre.com/sites/MCO/search?q=${keywords}&limit=20`
     )
@@ -45,12 +43,12 @@ export default class SearchResult extends Component {
         console.log("state", this.state.products);
       });
     event.preventDefault();
-  }
+  };
 
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit(this.state.search)}>
           <input
             type="text"
             name="mic32BoldRegularsearch"
