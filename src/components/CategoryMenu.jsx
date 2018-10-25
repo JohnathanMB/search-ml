@@ -11,13 +11,7 @@ class CategoryMenu extends Component {
       categories: [],
       selectedItem: null
     };
-    this.handleClick = this.handleClick.bind(this);
   }
-
-  handleClick = cID => {
-    this.setState({ selectedItem: cID });
-    alert(cID);
-  };
 
   componentDidMount() {
     fetch(`https://api.mercadolibre.com/sites/MCO/categories`)
@@ -27,7 +21,10 @@ class CategoryMenu extends Component {
       .then(data => {
         let items = data.map(({ id, name } = it) => {
           return (
-            <li key={id} onClick={() => this.props.submit(id)}>
+            <li
+              key={id}
+              onClick={() => this.props.submit(searchByCategory)(id)}
+            >
               <p>{name}</p>
             </li>
           );

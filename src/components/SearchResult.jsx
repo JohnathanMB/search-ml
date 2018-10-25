@@ -15,6 +15,7 @@ export default class SearchResult extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.search = this.search.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -28,6 +29,11 @@ export default class SearchResult extends Component {
   };
 
   handleSubmit = searchBy => keywords => event => {
+    this.search(searchBy)(keywords);
+    event.preventDefault();
+  };
+
+  search = searchBy => keywords => {
     fetch(
       `https://api.mercadolibre.com/sites/MCO/search?${searchBy}=${keywords}&limit=20`
     )
@@ -49,7 +55,7 @@ export default class SearchResult extends Component {
         this.setState({ products: items });
         console.log("state", this.state.products);
       });
-    event.preventDefault();
+    //event.preventDefault();
   };
 
   render() {
@@ -65,7 +71,7 @@ export default class SearchResult extends Component {
           <input type="submit" value="Buscar !" />
         </form>
         <div className="float quarter menu card-4">
-          <CategoryMenu submit={this.handleClick} />
+          <CategoryMenu submit={this.search} />
         </div>
         <div className="float three-quarter">
           <ul>{this.state.products}</ul>
