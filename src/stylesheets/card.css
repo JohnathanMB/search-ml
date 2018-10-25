@@ -10,6 +10,17 @@
   max-width: 1000px;
 }
 
+.menu {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 1rem;
+  position: relative;
+  padding: 20px;
+  width: 90%;
+  max-width: 1000px;
+}
+
 .card-4 {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }

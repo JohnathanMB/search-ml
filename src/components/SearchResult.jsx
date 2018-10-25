@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import SearchItem from "./SearchItem";
 import "../stylesheets/SearchResult.css";
+import CategoryMenu from "./CategoryMenu";
+
+const searchByProduct = "q";
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -24,9 +27,9 @@ export default class SearchResult extends Component {
     this.setState({ search: event.target.value });
   };
 
-  handleSubmit = keywords => event => {
+  handleSubmit = searchBy => keywords => event => {
     fetch(
-      `https://api.mercadolibre.com/sites/MCO/search?q=${keywords}&limit=20`
+      `https://api.mercadolibre.com/sites/MCO/search?${searchBy}=${keywords}&limit=20`
     )
       .then(results => {
         return results.json();
@@ -34,7 +37,11 @@ export default class SearchResult extends Component {
       .then(data => {
         let items = data.results.map(({ id, title, price, thumbnail } = it) => {
           return (
-            <li key={id} onClick={() => this.handleClick(id)}>
+            <li
+              className="card card-4"
+              key={id}
+              onClick={() => this.handleClick(id)}
+            >
               <SearchItem title={title} price={price} thumbnail={thumbnail} />
             </li>
           );
@@ -48,7 +55,7 @@ export default class SearchResult extends Component {
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit(this.state.search)}>
+        <form onSubmit={this.handleSubmit(searchByProduct)(this.state.search)}>
           <input
             type="text"
             name="mic32BoldRegularsearch"
@@ -57,7 +64,9 @@ export default class SearchResult extends Component {
           />
           <input type="submit" value="Buscar !" />
         </form>
-        <div className="float quarter card card-4">Categories</div>
+        <div className="float quarter menu card-4">
+          <CategoryMenu submit={this.handleClick} />
+        </div>
         <div className="float three-quarter">
           <ul>{this.state.products}</ul>
         </div>
