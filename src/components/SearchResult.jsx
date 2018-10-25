@@ -19,9 +19,9 @@ export default class SearchResult extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleClick = itemID => {
-    this.setState({ selectedItem: itemID });
-    alert(itemID);
+  handleClick = itemName => {
+    this.setState({ selectedItem: itemName });
+    alert(itemName);
   };
 
   handleChange = event => {
@@ -46,7 +46,7 @@ export default class SearchResult extends Component {
             <li
               className="card card-4"
               key={id}
-              onClick={() => this.handleClick(id)}
+              onClick={() => this.handleClick(title)}
             >
               <SearchItem title={title} price={price} thumbnail={thumbnail} />
             </li>
