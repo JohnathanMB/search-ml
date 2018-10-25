@@ -1,0 +1,15 @@
+ul {
+  list-style: none;
+}
+
+.float {
+  float: left;
+}
+
+.quarter {
+  width: 20%;
+}
+
+.three-quarter {
+  width: 70%;
+}
