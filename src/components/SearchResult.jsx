@@ -4,6 +4,7 @@ import "../stylesheets/SearchResult.css";
 import CategoryMenu from "./CategoryMenu";
 
 const searchByProduct = "q";
+const searchByCategory = "category";
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -16,7 +17,15 @@ export default class SearchResult extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.search = this.search.bind(this);
+    this.searchCategory = this.searchCategory.bind(this);
   }
+
+  searchCategory = keywords => {
+    this.handleSubmit(searchByCategory)(keywords);
+    // this.setState({ selectedItem: keywords });
+    alert(keywords);
+  };
 
   handleClick = itemID => {
     this.setState({ selectedItem: itemID });
@@ -27,7 +36,12 @@ export default class SearchResult extends Component {
     this.setState({ search: event.target.value });
   };
 
-  handleSubmit = searchBy => keywords => event => {
+  search = searchBy => keywords => event => {
+    this.handleSubmit(searchBy)(keywords);
+    event.preventDefault();
+  };
+
+  handleSubmit = searchBy => keywords => {
     fetch(
       `https://api.mercadolibre.com/sites/MCO/search?${searchBy}=${keywords}&limit=20`
     )
@@ -49,13 +63,13 @@ export default class SearchResult extends Component {
         this.setState({ products: items });
         console.log("state", this.state.products);
       });
-    event.preventDefault();
+    //event.preventDefault();
   };
 
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit(searchByProduct)(this.state.search)}>
+        <form onSubmit={this.search(searchByProduct)(this.state.search)}>
           <input
             type="text"
             name="mic32BoldRegularsearch"
@@ -65,7 +79,7 @@ export default class SearchResult extends Component {
           <input type="submit" value="Buscar !" />
         </form>
         <div className="float quarter menu card-4">
-          <CategoryMenu submit={this.handleClick} />
+          <CategoryMenu submit={this.handleSubmit} />
         </div>
         <div className="float three-quarter">
           <ul>{this.state.products}</ul>
