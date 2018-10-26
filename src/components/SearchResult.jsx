@@ -4,6 +4,7 @@ import "../stylesheets/SearchResult.css";
 import CategoryMenu from "./CategoryMenu";
 
 const searchByProduct = "q";
+var viewingDetail = false;
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -21,7 +22,8 @@ export default class SearchResult extends Component {
 
   handleClick = itemName => {
     this.setState({ selectedItem: itemName });
-    alert(itemName);
+    viewingDetail = true;
+    //alert(itemName);
   };
 
   handleChange = event => {
@@ -34,6 +36,7 @@ export default class SearchResult extends Component {
   };
 
   search = searchBy => keywords => {
+    viewingDetail = false;
     fetch(
       `https://api.mercadolibre.com/sites/MCO/search?${searchBy}=${keywords}&limit=20`
     )
@@ -73,9 +76,13 @@ export default class SearchResult extends Component {
         <div className="float quarter menu card-4">
           <CategoryMenu submit={this.search} />
         </div>
-        <div className="float three-quarter">
-          <ul>{this.state.products}</ul>
-        </div>
+        {viewingDetail ? (
+          <div className="float menu card-4">Detail should be here :)</div>
+        ) : (
+          <div className="float three-quarter">
+            <ul>{this.state.products}</ul>
+          </div>
+        )}
       </React.Fragment>
     );
   }
