@@ -1,4 +1,4 @@
-FROM node:8-alpine
+FROM node:8-alpine as builder
 
 ADD yarn.lock /yarn.lock
 ADD package.json /package.json
@@ -18,3 +18,14 @@ EXPOSE 35729
 
 ENTRYPOINT ["/bin/bash", "/app/run.sh"]
 CMD ["start"]
+
+#stage 2 nginx
+
+FROM nginx:1.13.3-alpine
+
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY nginx.conf /etc/nginx/conf.default
+COPY --from=builder /app/build /usr/share/nginx/html
+
+CMD ["nginx", "-g", "daemon off;"]
