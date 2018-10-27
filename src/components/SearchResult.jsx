@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchItem from "./SearchItem";
 import "../stylesheets/SearchResult.css";
 import CategoryMenu from "./CategoryMenu";
+import Detail from "./Detail";
 
 const searchByProduct = "q";
 var viewingDetail = false;
@@ -20,11 +21,11 @@ export default class SearchResult extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleClick = itemName => {
-    this.setState({ selectedItem: itemName });
+  handleClick(itemID) {
+    this.setState({ selectedItem: itemID });
     viewingDetail = true;
     //alert(itemName);
-  };
+  }
 
   handleChange = event => {
     this.setState({ search: event.target.value });
@@ -49,7 +50,7 @@ export default class SearchResult extends Component {
             <li
               className="card card-4"
               key={id}
-              onClick={() => this.handleClick(title)}
+              onClick={() => this.handleClick(id)}
             >
               <SearchItem title={title} price={price} thumbnail={thumbnail} />
             </li>
@@ -77,7 +78,9 @@ export default class SearchResult extends Component {
           <CategoryMenu submit={this.search} />
         </div>
         {viewingDetail ? (
-          <div className="float menu card-4">Detail should be here :)</div>
+          <div className="float detail three-quarter card-4">
+            <Detail itemID={this.state.selectedItem} />
+          </div>
         ) : (
           <div className="float three-quarter">
             <ul>{this.state.products}</ul>
