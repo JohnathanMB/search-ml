@@ -14,7 +14,9 @@ class CategoryMenu extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://api.mercadolibre.com/sites/MCO/categories`)
+    fetch(`https://api.mercadolibre.com/sites/MCO/categories`, {
+      mode: "no-cors"
+    })
       .then(results => {
         return results.json();
       })
