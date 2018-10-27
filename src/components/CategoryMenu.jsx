@@ -14,9 +14,9 @@ class CategoryMenu extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://api.mercadolibre.com/sites/MCO/categories`, {
-      mode: "no-cors"
-    })
+    const proxyUrl = "https://floating-shelf-98655.herokuapp.com/",
+      targetUrl = "https://api.mercadolibre.com/sites/MCO/categories";
+    fetch(proxyUrl + targetUrl)
       .then(results => {
         return results.json();
       })
